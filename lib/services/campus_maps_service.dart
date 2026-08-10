@@ -1,0 +1,76 @@
+import 'dart:convert';
+import 'package:src_kstu_app/models/campus_map_model.dart';
+import 'package:src_kstu_app/models/constant.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
+class CampusMapProvider extends ChangeNotifier {
+  List<CampusMapModel> _map = [];
+
+  List<CampusMapModel> get map => _map;
+
+  Future<List<CampusMapModel>> fetchNotice(String url) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  final cacheKey = 'cached_map_page';
+  final cachedMaps = prefs.getString(cacheKey);
+
+  // Use cached data first
+  if (cachedMaps != null) {
+    final List<dynamic> cachedData = json.decode(cachedMaps);
+    _map = cachedData.map((e) => CampusMapModel.fromJson(e)).toList();
+    notifyListeners();
+  }
+
+  // Fetch fresh data from API
+  String token = await getToken();
+  final response = await http.get(
+    Uri.parse(url),
+    headers: {
+      "Accept": "application/json",
+      'Authorization': 'Bearer $token',
+    },
+  );
+
+  if (response.statusCode == 200) {
+    Map<String, dynamic> jsonData = json.decode(response.body)['campus_landmarks'];
+    final List<dynamic> data = jsonData['data'];
+    final newMapJson = json.encode(data);
+
+    // Update only if data has changed
+    if (cachedMaps != newMapJson) {
+      await prefs.setString(cacheKey, newMapJson);
+      _map = data.map((e) => CampusMapModel.fromJson(e)).toList();
+      notifyListeners();
+    }
+
+    return _map;
+  } else if (response.statusCode == 401) {
+    throw Exception(jsonDecode(response.body)['message']);
+  } else {
+    if (_map.isNotEmpty) return _map; // fallback to last loaded
+    throw Exception('Failed to fetch campus map!');
+  }
+}
+
+  Future<String> getToken() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    return pref.getString("token") ?? '';
+  }
+
+    Future<CampusMapModel> fetchMapDetails(int trendId) async {
+    String token = await getToken();
+    final response = await http
+        .get(Uri.parse('$camMapDetailUrl/$trendId'), headers: {
+      "Accept": "application/json",
+      'Authorization': 'Bearer $token'
+    });
+    if (response.statusCode == 200) {
+      return CampusMapModel.fromJson(jsonDecode(response.body)["data"]);
+    } else if (response.statusCode == 401) {
+      throw Exception(jsonDecode(response.body)['message']);
+    } else {
+      throw Exception('Failed to fetch data from api!');
+    }
+  }
+}
