@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:src_kstu_app/components/app_animations.dart';
 
 class UpdatePasswordPage extends StatefulWidget {
   const UpdatePasswordPage({super.key});
@@ -142,7 +143,7 @@ class _UpdatePasswordPageState extends State<UpdatePasswordPage> {
                                       fontWeight: FontWeight.bold),
                                 )
                               ],
-                            ),
+                            ).appEntrance(),
                           ]),
                         ),
                       )),
@@ -328,7 +329,7 @@ class _UpdatePasswordPageState extends State<UpdatePasswordPage> {
                                         ),
                                       ),
                                     )
-                                  ]),
+                                  ].appStaggered()),
                             ),
                           ))
                     ],

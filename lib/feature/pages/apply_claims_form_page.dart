@@ -8,6 +8,7 @@ import 'package:src_kstu_app/components/colors.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:src_kstu_app/models/scholarship_type_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:src_kstu_app/components/app_animations.dart';
 
 class ApplyClaimsFormPage extends StatefulWidget {
   final ScholarshipType scholarship;
@@ -699,7 +700,7 @@ class _ApplyClaimsFormPageState extends State<ApplyClaimsFormPage> {
                                     ),
                                   ),
                                 ],
-                              ),
+                              ).appEntrance(),
                             ],
                           ),
                         ),
@@ -785,7 +786,8 @@ class _ApplyClaimsFormPageState extends State<ApplyClaimsFormPage> {
                               );
                             },
                           ),
-                        ),
+                        ).animate().fadeIn(
+                            duration: AppMotion.base, curve: AppMotion.curve),
                       ),
                     ),
                   ],

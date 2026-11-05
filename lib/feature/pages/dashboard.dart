@@ -22,6 +22,7 @@ import 'package:src_kstu_app/feature/pages/error_pages/no_internet.dart';
 
 import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:src_kstu_app/components/app_animations.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -477,7 +478,7 @@ class _DashboardState extends State<Dashboard>
                                             color: topColor,
                                             fontSize: 25,
                                             fontWeight: FontWeight.bold),
-                                      ),
+                                      ).appEntrance(),
                                     ),
                                     FutureBuilder<List<Announcement>>(
                                       future: noticeProvider.fetchNotice(1),
@@ -508,7 +509,7 @@ class _DashboardState extends State<Dashboard>
                                                 scrollDirection:
                                                     Axis.horizontal,
                                                 itemBuilder: (context, index) {
-                                                  return index !=
+                                                  return (index !=
                                                           noticeboard.length
                                                       ? GestureDetector(
                                                           onTap: () async {
@@ -661,7 +662,9 @@ class _DashboardState extends State<Dashboard>
                                                                 ),
                                                               ),
                                                             )
-                                                          : Container();
+                                                          : Container())
+                                                      .appListEntrance(index,
+                                                          axis: Axis.horizontal);
                                                 },
                                               ),
                                             ),
@@ -681,7 +684,7 @@ class _DashboardState extends State<Dashboard>
                                             color: topColor,
                                             fontSize: 25,
                                             fontWeight: FontWeight.bold),
-                                      ),
+                                      ).appEntrance(),
                                     ),
                                     const SizedBox(
                                       height: 10,

@@ -14,6 +14,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:async/async.dart';
 import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:src_kstu_app/components/app_animations.dart';
 
 enum AnnouncementLoadMoreStatus { LOADING, STABLE }
 
@@ -246,7 +247,7 @@ class _TrendingComponentState extends State<TrendingComponent> {
 
         itemBuilder: ((context, index) {
           // if (index < trend.length) {
-          return dataLoading
+          return (dataLoading
               ? TrendingShimmer()
               : Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -426,7 +427,8 @@ class _TrendingComponentState extends State<TrendingComponent> {
                     ),
                   ],
                 ),
-              );
+              ))
+              .appListEntrance(index);
         }));
   }
 }

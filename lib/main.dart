@@ -11,10 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
-// Shared across the app so the notification click handler below can push a
-// route without needing a BuildContext from whatever screen happens to be
-// mounted (it may fire before any of our own screens have built yet, e.g.
-// when the app is cold-started by tapping a notification).
 final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async{
@@ -53,9 +49,6 @@ void main() async{
   ));
 }
 
-// Fires whenever the user taps a notification: while the app is in the
-// background, killed (cold start), or in the foreground. This is the single
-// place that owns "tap -> open the announcement" for every app state.
 void _listenForNotificationClicks() {
   OneSignal.Notifications.addClickListener((event) {
     final data = event.notification.additionalData;
@@ -69,8 +62,6 @@ void _listenForNotificationClicks() {
 }
 
 Future<void> _navigateToAnnouncement(int announcementId) async {
-  // On a cold start, this can fire before MaterialApp has attached the
-  // navigator. Wait for it rather than silently dropping the tap.
   var navigator = navigatorKey.currentState;
   var attempts = 0;
   while (navigator == null && attempts < 50) {
@@ -101,6 +92,15 @@ class _MyAppState extends State<MyApp> {
       title: 'SRC-KsTU',
       theme: ThemeData(
           primarySwatch: Colors.blue,
+          // Modern, subtle zoom + fade on every route push/pop, app-wide.
+          // Matches current Android system motion and needs no changes at
+          // any Navigator call site.
+          pageTransitionsTheme: const PageTransitionsTheme(
+            builders: {
+              TargetPlatform.android: ZoomPageTransitionsBuilder(),
+              TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+            },
+          ),
           textTheme: TextTheme(
             displayLarge: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             displayMedium: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),

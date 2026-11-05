@@ -4,6 +4,7 @@ import 'package:src_kstu_app/components/colors.dart';
 import 'package:src_kstu_app/feature/pages/dashboard.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:src_kstu_app/components/app_animations.dart';
 
 class AcademicCalendarPage extends StatefulWidget {
   const AcademicCalendarPage({super.key});
@@ -118,7 +119,7 @@ class _AcademicCalendarPageState extends State<AcademicCalendarPage> {
                                           fontWeight: FontWeight.bold),
                                     )
                                   ],
-                                ),
+                                ).appEntrance(),
                               ]),
                             )),
                         ),
@@ -144,14 +145,15 @@ class _AcademicCalendarPageState extends State<AcademicCalendarPage> {
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
-                                  ),
+                                  ).appEntrance(),
                                   const SizedBox(height: 10),
                                   Expanded(
                                     child: ListView.builder(
                                       itemCount: _events.length,
                                       itemBuilder: (context, index) {
                                         final event = _events[index];
-                                        return _buildEventCard(event);
+                                        return _buildEventCard(event)
+                                            .appListEntrance(index);
                                       },
                                     ),
                                   ),

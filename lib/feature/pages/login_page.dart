@@ -14,6 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:src_kstu_app/components/app_animations.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -102,19 +103,25 @@ class _LoginPageState extends State<LoginPage> {
     await prefs.setString("image", user.userImg ?? '');
     await prefs.setString("yrOfAdmission", user.yrOfAdmission ?? '');
     await prefs.setString("yrOfCompletion", user.yrOfCompletion ?? '');
+    var name = prefs.getString('name');
+    // Grab the messenger before navigating: pushAndRemoveUntil unmounts
+    // LoginPage, so ScaffoldMessenger.of(context) would be stale afterwards
+    // (the snackbar would show but its Dismiss action would be a no-op).
+    final messenger = ScaffoldMessenger.of(context);
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => Dashboard()), (route) => false);
-    var name = prefs.getString('name');
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    messenger.hideCurrentSnackBar();
+    messenger.showSnackBar(SnackBar(
       content: Text('Welcome, $name'),
       backgroundColor: topColor,
       behavior: SnackBarBehavior.floating,
+      duration: const Duration(seconds: 3),
       action: SnackBarAction(
         label: 'Dismiss',
         disabledTextColor: Colors.white,
         textColor: Colors.yellow,
         onPressed: () {
-          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          messenger.hideCurrentSnackBar();
         },
       ),
     ));
@@ -285,7 +292,7 @@ class _LoginPageState extends State<LoginPage> {
                                                   "assets/images/f.png",
                                                   fit: BoxFit.cover,
                                                 ),
-                                              ),
+                                              ).appPopIn(duration: AppMotion.slow),
                                               const SizedBox(
                                                 height: 24,
                                               ),
@@ -296,7 +303,9 @@ class _LoginPageState extends State<LoginPage> {
                                                     fontWeight:
                                                         FontWeight.bold,
                                                     fontSize: 30),
-                                              ),
+                                              ).appEntrance(
+                                                  delay: const Duration(
+                                                      milliseconds: 200)),
                                             ],
                                           ),
                                         )),
@@ -518,7 +527,7 @@ class _LoginPageState extends State<LoginPage> {
                                                   ],
                                                 ),
                                               ),
-                                            ]),
+                                            ].appStaggered()),
                                           ),
                                         ))
                                   ],

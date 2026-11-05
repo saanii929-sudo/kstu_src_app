@@ -15,6 +15,7 @@ import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
 import 'package:src_kstu_app/components/trending_component.dart';
 import 'package:src_kstu_app/feature/pages/error_pages/no_internet.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:src_kstu_app/components/app_animations.dart';
 
 class AllNoticeBoardPage extends StatefulWidget {
   const AllNoticeBoardPage({super.key});
@@ -135,7 +136,7 @@ class _AllNoticeBoardPageState extends State<AllNoticeBoardPage> {
                                 fontWeight: FontWeight.bold),
                           )
                         ],
-                      ),
+                      ).appEntrance(),
                     ]),
                   ),
                 )),

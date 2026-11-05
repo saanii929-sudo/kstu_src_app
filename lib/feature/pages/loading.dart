@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:src_kstu_app/components/app_animations.dart';
 
 class LoadingPage extends StatefulWidget {
   const LoadingPage({super.key});
@@ -255,7 +256,7 @@ class _LoadingPageState extends State<LoadingPage> {
                               fit: BoxFit.contain,
                             ),
                           ),
-                        ),
+                        ).appPopIn(duration: AppMotion.slow),
                         const SizedBox(
                           height: 20,
                         ),
@@ -269,7 +270,7 @@ class _LoadingPageState extends State<LoadingPage> {
                               fontSize: 18,
                             ),
                           ),
-                        ),
+                        ).appEntrance(delay: const Duration(milliseconds: 300)),
                         Spacer(),
                          Center(
                           child: Text(
@@ -280,7 +281,7 @@ class _LoadingPageState extends State<LoadingPage> {
                               fontSize: 18,
                             ),
                           ),
-                        ),
+                        ).appEntrance(delay: const Duration(milliseconds: 420)),
                       ],
                     ),
                   ),
@@ -303,7 +304,7 @@ class _LoadingPageState extends State<LoadingPage> {
                               image: DecorationImage(
                                   image: AssetImage("assets/images/f.png"),
                                   fit: BoxFit.contain)),
-                        ),
+                        ).appPopIn(duration: AppMotion.slow),
                         const SizedBox(
                           height: 20,
                         ),
@@ -325,7 +326,7 @@ class _LoadingPageState extends State<LoadingPage> {
                                   fontSize: 18),
                             ),
                           ],
-                        ),
+                        ).appEntrance(delay: const Duration(milliseconds: 350)),
                       ],
                     ),
                   ),

@@ -9,6 +9,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:src_kstu_app/components/colors.dart';
+import 'package:src_kstu_app/components/app_animations.dart';
 
 class ScholarshipForms extends StatefulWidget {
   final String apiPath;
@@ -316,7 +317,7 @@ class _ScholarshipFormsState extends State<ScholarshipForms> {
                       ),
                     ),
                   ),
-                );
+                ).appListEntrance(index);
               },
               childCount: forms.length,
             ),

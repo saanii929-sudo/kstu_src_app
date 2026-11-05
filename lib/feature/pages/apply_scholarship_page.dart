@@ -11,6 +11,7 @@ import 'package:src_kstu_app/feature/pages/apply_scholarship_form_page.dart';
 import 'package:src_kstu_app/feature/pages/dashboard.dart';
 import 'package:http/http.dart' as http;
 import 'package:src_kstu_app/models/scholarship_type_model.dart';
+import 'package:src_kstu_app/components/app_animations.dart';
 
 class ApplyScholarshipPage extends StatefulWidget {
   const ApplyScholarshipPage({super.key});
@@ -80,7 +81,7 @@ class _ApplyScholarshipPageState extends State<ApplyScholarshipPage> {
         padding: const EdgeInsets.only(top: 40),
         child: Column(
           children: [
-            _buildAppBar(),
+            _buildAppBar().appEntrance(),
             Expanded(
               child: Container(
                 width: double.infinity,
@@ -114,7 +115,7 @@ class _ApplyScholarshipPageState extends State<ApplyScholarshipPage> {
                           _buildScholarshipInfoCard(),
                           const SizedBox(height: 40),
                           _buildApplyButton(),
-                        ],
+                        ].appStaggered(),
                       ),
                     ),
                   ),

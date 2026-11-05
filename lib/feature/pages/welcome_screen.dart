@@ -8,6 +8,7 @@ import 'package:src_kstu_app/services/connectivity_helper.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:src_kstu_app/components/app_animations.dart';
 
 
 class WelcomeScreenPage extends StatefulWidget {
@@ -228,7 +229,7 @@ class _WelcomeScreenPageState extends State<WelcomeScreenPage>
                                         ),
                                       ),
                                     ),
-                                  ),
+                                  ).appListEntrance(1),
                                   const SizedBox(
                                     height: 20,
                                   ),
@@ -263,7 +264,7 @@ class _WelcomeScreenPageState extends State<WelcomeScreenPage>
                                         ),
                                       ),
                                     ),
-                                  ),
+                                  ).appListEntrance(2),
                                 ],
                               ),
                             ),

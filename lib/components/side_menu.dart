@@ -22,6 +22,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:src_kstu_app/components/app_animations.dart';
 
 class SideMenu extends StatefulWidget {
   const SideMenu({super.key});
@@ -683,7 +684,7 @@ class _SideMenuState extends State<SideMenu> {
                   ));
                 },
               ),
-            ],
+            ].appStaggered(),
           ),
         ),
       ),

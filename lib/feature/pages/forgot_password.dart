@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:src_kstu_app/components/app_animations.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
@@ -127,7 +128,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                             "assets/images/f.png",
                                             fit: BoxFit.cover,
                                           ),
-                                        ),
+                                        ).appPopIn(duration: AppMotion.slow),
                                         const SizedBox(
                                           height: 25,
                                         ),
@@ -137,7 +138,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                               color: bottomColor,
                                               fontWeight: FontWeight.bold,
                                               fontSize: 30),
-                                        )
+                                        ).appEntrance(
+                                            delay: const Duration(
+                                                milliseconds: 200))
                                       ],
                                     ),
                                   ),
@@ -242,7 +245,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                       ),
                                     ),
                                   )
-                                ]),
+                                ].appStaggered()),
                               ),
                             ))
                       ],

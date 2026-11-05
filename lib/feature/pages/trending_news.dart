@@ -15,6 +15,7 @@ import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
 import 'package:src_kstu_app/components/trending_component.dart';
 import 'package:src_kstu_app/feature/pages/error_pages/no_internet.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:src_kstu_app/components/app_animations.dart';
 
 class TrendingNewsPage extends StatefulWidget {
   const TrendingNewsPage({super.key});
@@ -139,7 +140,7 @@ class _TrendingNewsPageState extends State<TrendingNewsPage> {
                                     fontWeight: FontWeight.bold),
                               )
                             ],
-                          ),
+                          ).appEntrance(),
                         ]),
                       ),
                     )),

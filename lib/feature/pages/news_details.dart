@@ -18,12 +18,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:media_store_plus/media_store_plus.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:dio/dio.dart';
-import 'package:device_info_plus/device_info_plus.dart';
-import 'dart:io';
+import 'package:src_kstu_app/components/app_animations.dart';
 
 class DetailNews extends StatefulWidget {
   const DetailNews({super.key, required this.title});
@@ -39,9 +37,6 @@ class _DetailNewsState extends State<DetailNews> {
   bool isLoading = false;
 
   Future<void> saveImageToGallery(String imageUrl, BuildContext context) async {
-    final hasPermission = await requestStoragePermission(context);
-    if (!hasPermission) return;
-
     try {
       final tempDir = await getTemporaryDirectory();
       final fileName = '${DateTime.now().millisecondsSinceEpoch}.jpg';
@@ -73,27 +68,6 @@ class _DetailNewsState extends State<DetailNews> {
     } catch (e) {
       _showErrorDialog(context, e.toString());
     }
-  }
-
-  Future<bool> requestStoragePermission(BuildContext context) async {
-    if (Platform.isAndroid) {
-      final deviceInfo = DeviceInfoPlugin();
-      final androidInfo = await deviceInfo.androidInfo;
-      final sdkVersion = androidInfo.version.sdkInt;
-
-      if (sdkVersion >= 33) {
-        // Android 13+
-        final status = await Permission.photos.request();
-        return status.isGranted;
-      } else {
-        final status = await Permission.storage.request();
-        return status.isGranted;
-      }
-    } else if (Platform.isIOS) {
-      final status = await Permission.photos.request();
-      return status.isGranted;
-    }
-    return false;
   }
 
   void _showSuccessDialog(BuildContext context) {
@@ -473,7 +447,7 @@ class _DetailNewsState extends State<DetailNews> {
                                               Color.fromARGB(255, 91, 89, 89),
                                         ),
                                         KeyMomentContainer(title: widget.title)
-                                      ],
+                                      ].appStaggered(),
                                     ),
                                   ),
                                 ),
@@ -481,7 +455,8 @@ class _DetailNewsState extends State<DetailNews> {
                             ),
                           ))
                         ]),
-                      );
+                      ).animate().fadeIn(
+                          duration: AppMotion.base, curve: AppMotion.curve);
                     } else if (snapshot.connectionState ==
                         ConnectionState.waiting) {
                       return Container(

@@ -24,9 +24,9 @@ android {
     defaultConfig {
         applicationId = "com.kstu_src2.app"
         minSdk = flutter.minSdkVersion
-        targetSdk = 35
-        versionCode = 22
-        versionName = "1.4.2"
+        targetSdk = 36
+        versionCode = 28
+        versionName = "1.5.1"
     }
 
     // Load keystore properties from file
@@ -60,7 +60,10 @@ android {
     }
     packagingOptions {
       jniLibs {
-        useLegacyPackaging = true
+        // Compressed (legacy) packaging can't be page-aligned, which fails
+        // Play Console's 16 KB memory page size requirement. Native libs
+        // must be stored uncompressed so the OS can mmap them directly.
+        useLegacyPackaging = false
       }
     }
 }
