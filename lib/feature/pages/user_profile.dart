@@ -99,7 +99,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                         flex: 4,
                         child: Container(
                           height: MediaQuery.of(context).size.height / 2,
-                          decoration: const BoxDecoration(
+                          decoration:  BoxDecoration(
                               color: topColor,
                               borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(30))),

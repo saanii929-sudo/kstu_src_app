@@ -13,7 +13,7 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
   OneSignal.initialize("a8a3a92a-86cd-41b5-8efe-2e5badaf01d0");
@@ -21,8 +21,6 @@ void main() async{
   await FlutterDownloader.initialize(
     debug: true,
   );
-
-
 
   runApp(MultiProvider(
     providers: [
@@ -92,9 +90,6 @@ class _MyAppState extends State<MyApp> {
       title: 'SRC-KsTU',
       theme: ThemeData(
           primarySwatch: Colors.blue,
-          // Modern, subtle zoom + fade on every route push/pop, app-wide.
-          // Matches current Android system motion and needs no changes at
-          // any Navigator call site.
           pageTransitionsTheme: const PageTransitionsTheme(
             builders: {
               TargetPlatform.android: ZoomPageTransitionsBuilder(),

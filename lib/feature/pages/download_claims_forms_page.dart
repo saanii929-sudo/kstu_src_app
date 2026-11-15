@@ -39,7 +39,7 @@ class _DownloadClaimsFormsPageState extends State<DownloadClaimsFormsPage> {
                         // flex: 1,
                         child: Container(
                       height: 20,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                           color: topColor,
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(30))),

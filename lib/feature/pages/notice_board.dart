@@ -105,7 +105,7 @@ class _AllNoticeBoardPageState extends State<AllNoticeBoardPage> {
               children: [
                 Expanded(
                     child: Container(
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                       color: topColor,
                       borderRadius:
                           BorderRadius.only(bottomLeft: Radius.circular(30))),

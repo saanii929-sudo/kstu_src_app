@@ -218,122 +218,131 @@ class _LoadingPageState extends State<LoadingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: topColor,
-        body: Semantics(
-          label: "Loading page",
-          child: SafeArea(
-            child:
-                Consumer<ConnectivityProvider>(builder: (context, provider, _) {
-              if (provider.status == ConnectivityStatus.Offline) {
-                SnackBar(
-                    content: Text("No internet connection"),
-                    backgroundColor: Colors.red,
-                    behavior: SnackBarBehavior.floating,
-                    action: SnackBarAction(
-                      label: 'Dismiss',
-                      disabledTextColor: Colors.white,
-                      textColor: Colors.yellow,
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                      },
-                    ));
-                return Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  color: topColor,
-                  child: Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Spacer(),
-                        Container(
-                          width: 240,
-                          height: 240,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage("assets/images/f.png"),
-                              fit: BoxFit.contain,
-                            ),
-                          ),
-                        ).appPopIn(duration: AppMotion.slow),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                         Center(
-                          child: Text(
-                            textAlign: TextAlign.center,
-                            "Students Representative Council KsTU",
-                            style: GoogleFonts.poppins(
-                              color: bottomColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ).appEntrance(delay: const Duration(milliseconds: 300)),
-                        Spacer(),
-                         Center(
-                          child: Text(
-                            "No internet connection",
-                            style: GoogleFonts.poppins(
-                              color: bottomColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ).appEntrance(delay: const Duration(milliseconds: 420)),
-                      ],
-                    ),
-                  ),
-                );
-              } else {
-                return Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  color: topColor,
-                  child: Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Spacer(),
-                        Container(
-                          width: 240,
-                          height: 240,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage("assets/images/f.png"),
-                                  fit: BoxFit.contain)),
-                        ).appPopIn(duration: AppMotion.slow),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Spacer(),
-                        Column(
-                          spacing: 12,
+      backgroundColor: topColor, // fallback while the image loads
+      body: Semantics(
+        label: "Loading page",
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            // 1. Full-screen background image
+            Image.asset(
+              "assets/images/hero_image.jpeg",
+              fit: BoxFit.cover,
+            ),
+
+            // 2. topColor overlay with opacity
+            Container(
+              color: topColor.withOpacity(0.9), // adjust 0.0 - 1.0
+            ),
+
+            // 3. Your existing content
+            SafeArea(
+              child: Consumer<ConnectivityProvider>(
+                builder: (context, provider, _) {
+                  if (provider.status == ConnectivityStatus.Offline) {
+                    return SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width,
+                      child: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            CircularProgressIndicator(
-                              color: bottomColor,
-                              strokeWidth: 5,
-                            ),
-                            RandomQouteGenerator(),
-                            Text(
-                              textAlign: TextAlign.center,
-                              "- Students Representative Council -",
-                              style: GoogleFonts.poppins(
+                            const Spacer(),
+                            Container(
+                              width: 240,
+                              height: 240,
+                              decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                      "assets/images/kstu_src_logo.png"),
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                            ).appPopIn(duration: AppMotion.slow),
+                            const SizedBox(height: 20),
+                            Center(
+                              child: Text(
+                                textAlign: TextAlign.center,
+                                "Students Representative Council KsTU",
+                                style: GoogleFonts.poppins(
                                   color: bottomColor,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 18),
-                            ),
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ).appEntrance(
+                                delay: const Duration(milliseconds: 300)),
+                            const Spacer(),
+                            Center(
+                              child: Text(
+                                "No internet connection",
+                                style: GoogleFonts.poppins(
+                                  color: bottomColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ).appEntrance(
+                                delay: const Duration(milliseconds: 420)),
                           ],
-                        ).appEntrance(delay: const Duration(milliseconds: 350)),
-                      ],
-                    ),
-                  ),
-                );
-              }
-            }),
-          ),
-        ));
+                        ),
+                      ),
+                    );
+                  } else {
+                    return SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width,
+                      child: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Spacer(),
+                            Container(
+                              width: 320,
+                              height: 320,
+                              decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                      "assets/images/kstu_src_logo.png"),
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                            ).appPopIn(duration: AppMotion.slow),
+                            const SizedBox(height: 20),
+                            const Spacer(),
+                            Column(
+                              spacing: 12,
+                              children: [
+                                CircularProgressIndicator(
+                                  color: bottomColor,
+                                  strokeWidth: 5,
+                                ),
+                                RandomQouteGenerator(),
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  "KsTU Students Representative Council",
+                                  style: GoogleFonts.poppins(
+                                    color: bottomColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ],
+                            ).appEntrance(
+                                delay: const Duration(milliseconds: 350)),
+                          ],
+                        ),
+                      ),
+                    );
+                  }
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

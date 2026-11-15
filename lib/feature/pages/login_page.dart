@@ -15,6 +15,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:src_kstu_app/components/app_animations.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -192,10 +193,9 @@ class _LoginPageState extends State<LoginPage> {
                                     Expanded(
                                         flex: 4,
                                         child: Container(
-                                          width: MediaQuery.of(context)
-                                              .size
-                                              .width,
-                                          decoration: const BoxDecoration(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          decoration: BoxDecoration(
                                               color: topColor,
                                               borderRadius: BorderRadius.only(
                                                   bottomLeft:
@@ -209,19 +209,18 @@ class _LoginPageState extends State<LoginPage> {
                                               SizedBox(
                                                 width: 200,
                                                 child: Image.asset(
-                                                  "assets/images/f.png",
+                                                  "assets/images/kstu_src_logo.png",
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
                                               const SizedBox(
                                                 height: 25,
                                               ),
-                                               Text(
+                                              Text(
                                                 "No internet connection",
                                                 style: GoogleFonts.poppins(
                                                     color: bottomColor,
-                                                    fontWeight:
-                                                        FontWeight.bold,
+                                                    fontWeight: FontWeight.bold,
                                                     fontSize: 30),
                                               )
                                             ],
@@ -271,41 +270,58 @@ class _LoginPageState extends State<LoginPage> {
                                   children: [
                                     Expanded(
                                         flex: 4,
-                                        child: Container(
-                                          width: MediaQuery.of(context)
-                                              .size
-                                              .width,
-                                          decoration: const BoxDecoration(
-                                              color: topColor,
-                                              borderRadius: BorderRadius.only(
-                                                  bottomLeft:
-                                                      Radius.circular(30))),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
+                                        child: ClipRRect(
+                                          borderRadius: const BorderRadius.only(
+                                            bottomLeft: Radius.circular(30),
+                                          ),
+                                          child: Stack(
+                                            fit: StackFit.expand,
                                             children: [
-                                              SizedBox(
-                                                width: 150,
-                                                child: Image.asset(
-                                                  "assets/images/f.png",
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ).appPopIn(duration: AppMotion.slow),
-                                              const SizedBox(
-                                                height: 24,
+                                              // Background image
+                                              Image.asset(
+                                                "assets/images/hero_image.jpeg",
+                                                fit: BoxFit.cover,
                                               ),
-                                               Text(
-                                                "SIGN IN",
-                                                style: GoogleFonts.poppins(
-                                                    color: bottomColor,
-                                                    fontWeight:
-                                                        FontWeight.bold,
-                                                    fontSize: 30),
-                                              ).appEntrance(
-                                                  delay: const Duration(
-                                                      milliseconds: 200)),
+                                              // topColor overlay with opacity
+                                              Container(
+                                                color:
+                                                    topColor.withOpacity(0.9),
+                                              ),
+                                              Center(
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 280,
+                                                      child: Image.asset(
+                                                        "assets/images/kstu_src_logo.png",
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ).appPopIn(
+                                                        duration:
+                                                            AppMotion.slow),
+                                                    const SizedBox(
+                                                      height: 24,
+                                                    ),
+                                                    Text(
+                                                      "SIGN IN",
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              color:
+                                                                  bottomColor,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 30),
+                                                    ).appEntrance(
+                                                        delay: const Duration(
+                                                            milliseconds: 200)),
+                                                  ],
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         )),
@@ -319,15 +335,16 @@ class _LoginPageState extends State<LoginPage> {
                                                       Radius.circular(30))),
                                           child: Form(
                                             key: formkey,
-                                            child: Column(children: [
+                                            child: Column(
+                                                children: [
                                               SizedBox(
                                                 height: isOnTap,
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets
-                                                    .symmetric(
-                                                    horizontal: 18.0,
-                                                    vertical: 10),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 18.0,
+                                                        vertical: 10),
                                                 child: TextFormField(
                                                   onTap: () {
                                                     setState(() {
@@ -347,24 +364,24 @@ class _LoginPageState extends State<LoginPage> {
                                                   decoration: InputDecoration(
                                                     contentPadding:
                                                         EdgeInsets.all(10),
-                                                    label: Text("Index Number or Email"),
+                                                    label: Text(
+                                                        "Index Number or Email"),
                                                     hintText: '',
                                                     prefixIcon:
                                                         Icon(Icons.email),
-                                                    border:
-                                                        OutlineInputBorder(
+                                                    border: OutlineInputBorder(
                                                       borderRadius:
-                                                          BorderRadius
-                                                              .circular(10.0),
+                                                          BorderRadius.circular(
+                                                              10.0),
                                                     ),
                                                   ),
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets
-                                                    .symmetric(
-                                                    horizontal: 18.0,
-                                                    vertical: 10),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 18.0,
+                                                        vertical: 10),
                                                 child: TextFormField(
                                                   onTap: () {
                                                     isOnTap = 20;
@@ -390,8 +407,7 @@ class _LoginPageState extends State<LoginPage> {
                                                         Icon(Icons.lock),
                                                     suffixIcon: IconButton(
                                                       icon: Icon(ispassword
-                                                          ? Icons
-                                                              .visibility_off
+                                                          ? Icons.visibility_off
                                                           : Icons.visibility),
                                                       onPressed: () {
                                                         setState(() {
@@ -400,11 +416,10 @@ class _LoginPageState extends State<LoginPage> {
                                                         });
                                                       },
                                                     ),
-                                                    border:
-                                                        OutlineInputBorder(
+                                                    border: OutlineInputBorder(
                                                       borderRadius:
-                                                          BorderRadius
-                                                              .circular(10.0),
+                                                          BorderRadius.circular(
+                                                              10.0),
                                                     ),
                                                   ),
                                                 ),
@@ -413,9 +428,9 @@ class _LoginPageState extends State<LoginPage> {
                                                 height: 15,
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets
-                                                    .symmetric(
-                                                    horizontal: 18.0),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 18.0),
                                                 child: GestureDetector(
                                                   onTap: () async {
                                                     dialog.show(
@@ -441,8 +456,7 @@ class _LoginPageState extends State<LoginPage> {
                                                         color: topColor,
                                                         borderRadius:
                                                             BorderRadius
-                                                                .circular(
-                                                                    10)),
+                                                                .circular(10)),
                                                     child: Center(
                                                       child: loading
                                                           ? SpinKitFadingCircle(
@@ -470,8 +484,7 @@ class _LoginPageState extends State<LoginPage> {
                                                               style: GoogleFonts.poppins(
                                                                   color: Colors
                                                                       .white,
-                                                                  fontSize:
-                                                                      20,
+                                                                  fontSize: 20,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold),
@@ -493,8 +506,7 @@ class _LoginPageState extends State<LoginPage> {
                                                       onTap: () async {
                                                         // Show loading dialog
                                                         dialog.show(
-                                                          message:
-                                                              'Waiting...',
+                                                          message: 'Waiting...',
                                                           type:
                                                               SimpleFontelicoProgressDialogType
                                                                   .hurricane,
@@ -503,7 +515,7 @@ class _LoginPageState extends State<LoginPage> {
                                                             Duration(
                                                                 seconds: 1));
                                                         dialog.hide();
-              
+
                                                         // Navigate to ForgotPasswordPage and remove all previous routes
                                                         Navigator.of(context).push(
                                                             MaterialPageRoute(
@@ -513,7 +525,8 @@ class _LoginPageState extends State<LoginPage> {
                                                       },
                                                       child: Text(
                                                         'Forgot Password?',
-                                                        style: GoogleFonts.poppins(
+                                                        style:
+                                                            GoogleFonts.poppins(
                                                           fontSize: 18,
                                                           fontWeight:
                                                               FontWeight.bold,

@@ -25,8 +25,8 @@ android {
         applicationId = "com.kstu_src2.app"
         minSdk = flutter.minSdkVersion
         targetSdk = 36
-        versionCode = 28
-        versionName = "1.5.1"
+        versionCode = 30
+        versionName = "1.5.3"
     }
 
     // Load keystore properties from file

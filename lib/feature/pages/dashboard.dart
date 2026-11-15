@@ -216,12 +216,6 @@ class _DashboardState extends State<Dashboard>
     }
   }
 
-  // Navigation on tap is handled globally in main.dart (addClickListener) so
-  // it works the same way whether the app is in the foreground, background,
-  // or was cold-started by the tap. This listener only controls whether the
-  // notification is shown while the app happens to already be open -
-  // it must not navigate on its own, or arrival would jump the user away
-  // before they ever tap anything.
   void listenForPushNotifications(BuildContext context) {
     debugPrint("Setting up OneSignal notification listeners");
 
@@ -240,11 +234,6 @@ class _DashboardState extends State<Dashboard>
     });
   }
 
-  // The lists below are fetched inline inside FutureBuilders in build(), so a
-  // provider-level notifyListeners() alone won't re-run them - only a
-  // setState() on this widget will. Without this, an announcement pushed
-  // while the user is already sitting on the dashboard wouldn't show up
-  // until they navigated away and back.
   Future<void> _refreshAnnouncementLists(BuildContext context) async {
     if (!context.mounted) return;
     final noticeProvider =
@@ -391,7 +380,7 @@ class _DashboardState extends State<Dashboard>
                   children: [
                     Container(
                       height: 25,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                           color: topColor,
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(30))),
@@ -651,7 +640,7 @@ class _DashboardState extends State<Dashboard>
                                                                   },
                                                                   child: Center(
                                                                     child:
-                                                                        const Icon(
+                                                                         Icon(
                                                                       Icons
                                                                           .arrow_forward_ios,
                                                                       color:

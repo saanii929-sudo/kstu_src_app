@@ -71,7 +71,7 @@ class _CampusMapState extends State<CampusMap> {
                         child: Container(
                           width: double.infinity,
                           height: 0,
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                               color: topColor,
                               borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(30))),
